@@ -66,6 +66,10 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont};
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[]  = { "firefox", NULL };
+static const char *ranger[] = {"st", "-e", "/usr/bin/ranger", NULL };
+static const char *bluetooth[] = { "bluetooth_dmenu", NULL };
+static const char *wallpaper[] = {"set_wallpaper", NULL };
+static const char *system_action[] = {"system_action", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -76,17 +80,21 @@ static Key keys[] = {
 	{ MODKEY,                       XK_g,      togglebar,      {0} },
 	{ MODKEY,                       XK_f,      zoom,           {0} },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_s,      incnmaster,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_s,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_w,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,             XK_w,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ShiftMask,             XK_e,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,             XK_y,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY|ShiftMask,             XK_r,      togglefloating, {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {0} },
 	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,  spawn,          {.v = browsercmd } },
-    { MODKEY,                       XK_Tab,    view,           {0} },
+	{ MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = ranger } },
+	{ MODKEY,                       XK_s,      spawn,          {.v = system_action } },
+	{ MODKEY,                       XK_b,      spawn,          {.v = bluetooth } },
+	{ MODKEY,                       XK_F1,     spawn,          {.v = wallpaper } },
+	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
